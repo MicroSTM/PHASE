@@ -129,8 +129,7 @@ dmypy.json
 .pyre/
 
 *.simg
-*.sh
-#*.txt
+# *.sh
 run_*
 viz/
 .nfs*

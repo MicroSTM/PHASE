@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# 0 env_ids
+# 1 alpha0
+# 2 alpha1
+# 3 size_a0
+# 4 size_a1
+# 5 size_i0
+# 6 size_i1
+# 7 strength_a0
+# 8 strength_a1
+# 9 angles_a0
+# 10 angles_a1
+# 11 goal_pre
+# 12 goal_ag_it
+# 13 goal_lm_it
+# 14 goals_end_a0
+# 15 goals_end_a1
+# 16 init_pos_a0
+# 17 init_pos_a1
+# 18 init_pos_i0
+# 19 init_pos_i1
+
+
+n_vids=18 #90
+for ((i=0;i<n_vids;++i)); do
+  #get params
+  args=()
+  while IFS= read -r line; do
+    l=($line)
+    args+=(${l[i]})
+  done < bash_scripts/chasing.txt
+  echo "params ${args[@]}"
+
+  g1=(${args[11]} ${args[12]} ${args[13]} ${args[14]})
+  g2=(${args[11]} ${args[12]} ${args[13]} ${args[15]})
+  echo ${g1[@]} ${g2[@]}
+
+	python main_particle.py \
+	--max-episode-length 100 --max-nb-episodes 1 --nb-simulations 1000 --max-rollout-steps 10 \
+	--levels 0 0 --cInit 1.25 --cBase 1000 --enable-renderer --num-agents 2 --num-items 2 \
+	--full-obs 0 0 --alpha ${args[1]} ${args[2]} --all-directions --save-date --action-space-types 0 0 \
+  --sizes ${args[3]} ${args[4]} ${args[5]} ${args[6]} \
+	--costs 0 0 --strengths ${args[7]} ${args[8]} \
+  --init-agent-angles ${args[9]} ${args[10]} \
+  --env-id ${args[0]} --goal1 ${g1[@]} --goal2 ${g2[@]} \
+  --init-positions ${args[16]} ${args[17]} ${args[18]} ${args[19]}
+done

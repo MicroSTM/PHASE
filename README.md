@@ -3,6 +3,8 @@
 Code for procedurally synthesizing PHASE animations, proposed in the paper: [*PHASE: PHysically-grounded Abstract Social Events
 for Machine Social Perception*](https://www.tshu.io/PHASE/PHASE.pdf).  
 
+The code was written by the lead authors of the paper, Aviv Netanyahu and Tianmin Shu. For more details of the dataset, please visit our [*project website*](https://www.tshu.io/PHASE).
+
 ## Requirements
 
 - Python 3.5
@@ -36,7 +38,7 @@ This will create parameters for several types of animations. Then you can run th
 
 In the script for a specific type of animations, you can specify the number of videos you want to generate for that type through `n_vids`.
 
-Note that not all sampled parameters can lead to the desired interaction. Here we are using heuristics to sample parameters that are more likely to lead to a certain type of animation. To create our original PHASE dataset, we further filtered out videos that were not reflecting the desired type manually. We are currently trying to create an automatic video selection.
+Note that not all sampled parameters can lead to the desired interaction. Here we are using heuristics to sample parameters that are more likely to lead to a certain type of animation. To create our original PHASE dataset, we further filtered out videos that were not reflecting the desired type manually. We intend to create an automatic video selection in the future.
 
 ## Cite
 If you use this code in your research, please consider citing the following paper.
